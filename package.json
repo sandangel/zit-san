@@ -1,0 +1,28 @@
+{
+  "name": "zit-san",
+  "version": "1.0.0",
+  "description": "Quickly Invoice user for payment using Web hooks",
+  "dependencies": {},
+  "devDependencies": {
+    "commitizen": "^2.10.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "typescript": "^2.9.2"
+  },
+  "scripts": {
+    "cz": "git-cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://sandangel@bitbucket.org/zehitomo/zit-san.git"
+  },
+  "keywords": [],
+  "author": "Zehitomo",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/zehitomo/zit-san#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "private": true
+}
