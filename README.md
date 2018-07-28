@@ -7,7 +7,7 @@ You can edit the image by opening ProjectOverview.xml in draw.io.
 ## Work Breakdown
 
 - [ ] Build a simple server for sending email.
-- [ ] Design a simple Payment page.
+- [x] Design a simple Payment page.
 - [ ] Build UI of Payment page.
 - [ ] Add Stripe integration on front-end.
 - [ ] Add Stripe integration on back-end.
