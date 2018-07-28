@@ -30,6 +30,12 @@ For more information please read this [link](https://conventionalcommits.org/).
 
 Quick start: instead of `git commit`, use `npm run cz` or `yarn cz`
 
+There 3 scopes in commit message:
+
+- 'payment-page': Payment page user interface.
+- 'zit-server': ZIT server side app.
+- '' (blank): overall the project.
+
 ### Typescript:
 
 We should use interface of TS to ensure the type safety for JSON data.
