@@ -1,0 +1,73 @@
+<template>
+    <p>
+        <span>{{textWithLength}}</span>
+        <span
+            class="hover-underline-animation"
+            @click="expanded = !expanded"
+        > {{ expanded ? 'less': 'more'}}</span>
+    </p>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
+  name: 'ReadMore',
+  data() {
+    return {
+      expanded: false,
+    };
+  },
+  props: {
+    text: {
+      type: String,
+      required: true,
+    },
+    length: {
+      type: Number,
+      default: 50,
+    },
+  },
+  computed: {
+    textWithLength(): string {
+      const text: string = this.text;
+      if (text.length > this.length && !this.expanded) {
+        return text.substring(0, this.length) + '...';
+      }
+      return text;
+    },
+  },
+});
+</script>
+
+<style lang="scss" scoped>
+p {
+  span:first-of-type {
+    margin-right: 5px;
+  }
+}
+.hover-underline-animation {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  color: $zehitomo-primary;
+}
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: $zehitomo-primary;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+</style>
+
+
