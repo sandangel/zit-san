@@ -1,32 +1,28 @@
 <template>
-    <section>
-        <form>
-            <div class="form-row">
-                <label for="card-element">
-                    Credit or debit card
-                </label>
-                <div
-                    id="card-element"
-                    @change="changeHandler"
-                    ref="card-element"
-                >
-                    <!-- A Stripe Element will be inserted here. -->
-            </div>
+  <section>
+    <form>
+      <div class="form-row">
+        <label for="card-element">
+          Credit or debit card
+        </label>
+        <div id="card-element"
+             @change="changeHandler"
+             ref="card-element">
+          <!-- A Stripe Element will be inserted here. -->
+        </div>
 
-            <!-- Used to display form errors. -->
-            <div
-                ref="card-errors"
-                role="alert"
-            ></div>
-                </div>
+        <!-- Used to display form errors. -->
+        <div ref="card-errors"
+             role="alert"></div>
+      </div>
 
-                <button
-                    class="invoice-submit"
-                    type="button"
-                    @click="submitHandler"
-                >Submit Payment</button>
-        </form>
-    </section>
+      <button class="invoice-submit"
+              type="button"
+              @click="submitHandler">
+        <span>Submit Payment</span>
+      </button>
+    </form>
+  </section>
 </template>
 
 <script lang="ts">
@@ -122,10 +118,35 @@ form {
     border-radius: 5px;
     background-color: $zehitomo-primary;
     color: white;
-    border: 1px solid transparent;
+    border: 0px solid transparent;
     box-shadow: 0 1px 3px #e6ebf1;
-    -webkit-transition: box-shadow 150ms ease;
-    transition: box-shadow 150ms ease;
+    transition: box-shadow 300ms ease, background-color 0.3s ease;
+    overflow: hidden;
+    position: relative;
+
+    &:before {
+      content: '';
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      display: block;
+      width: 0;
+      padding-top: 0;
+
+      border-radius: 100%;
+
+      background-color: rgba(236, 240, 241, 0.3);
+      transform: translate(-50%, -50%);
+    }
+
+    &:active:before {
+      width: 120%;
+      padding-top: 120%;
+
+      transition: width 0.3s ease-out, padding-top 0.3s ease-out;
+    }
 
     &:focus {
       outline: none;
@@ -153,8 +174,7 @@ form {
   border-radius: 4px;
   border: 1px solid transparent;
   box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
+  transition: box-shadow 300ms ease;
 }
 
 .StripeElement--focus {

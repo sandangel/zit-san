@@ -1,11 +1,11 @@
 <template>
-    <footer>
-        <span>
-            Copyright © 2017 REVOX. All rrights reserved.
-        </span>
-        <a href="#">Term of use</a>
-        <a href="#">Privacy policy</a>
-    </footer>
+  <footer>
+    <span>
+      Copyright © 2017 REVOX. All rrights reserved.
+    </span>
+    <a href="#">Term of use</a>
+    <a href="#">Privacy policy</a>
+  </footer>
 </template>
 <script lang="ts">
 import Vue from 'vue';
@@ -32,6 +32,7 @@ footer {
 
 @media only screen and (min-width: 600px) {
   footer {
+    font-size: 0.8rem;
     a {
       padding: 0 20px;
     }
