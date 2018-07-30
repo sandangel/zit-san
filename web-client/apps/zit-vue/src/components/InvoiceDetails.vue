@@ -1,49 +1,46 @@
 <template>
-    <section>
-        <table>
-            <thead>
-                <tr>
-                    <th>TASK DESCRIPTION</th>
-                    <th>RATE</th>
-                    <th>HOURS</th>
-                    <th>TOTAL</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    :key="index"
-                    v-for="(task, index) of tasks"
-                >
-                    <td class="invoice-description">
-                        <h4>{{task.title}}</h4>
-                        <ReadMore :text="task.description"></ReadMore>
-                    </td>
-                    <td>
-                        <h4>{{task.rate}}</h4>
-                    </td>
-                    <td>
-                        <h4>{{task.hours}}</h4>
-                    </td>
-                    <td>
-                        <h4>{{task.subtotal}}</h4>
-                    </td>
-                    </tr>
-            </tbody>
-        </table>
-    </section>
+  <section>
+    <table>
+      <thead>
+        <tr>
+          <th>TASK DESCRIPTION</th>
+          <th>RATE</th>
+          <th>HOURS</th>
+          <th>TOTAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          :key="index"
+          v-for="(task, index) of tasks"
+        >
+          <td class="invoice-description">
+            <h4>{{task.title}}</h4>
+            <ReadMore :text="task.description"></ReadMore>
+          </td>
+          <td>
+            <h4>{{task.rate}}</h4>
+          </td>
+          <td>
+            <h4>{{task.hours}}</h4>
+          </td>
+          <td>
+            <h4>{{task.subtotal}}</h4>
+          </td>
+          </tr>
+      </tbody>
+    </table>
+  </section>
 </template>
 
 <script lang="ts">
-import Vue, { DirectiveOptions } from 'vue';
-import { tasks } from '../tasks';
+import Vue from 'vue';
 import ReadMore from './ReadMore.vue';
 
 export default Vue.extend({
   name: 'InvoiceDetails',
-  data() {
-    return {
-      tasks,
-    };
+  props: {
+    tasks: Array,
   },
   components: {
     ReadMore,

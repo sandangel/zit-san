@@ -2,20 +2,20 @@
   <section>
     <p>
       Invoice to <br>
-      <span class="invoice-customer">Thinh Pham</span><br> Pages incoperated. <br> page.inc
+      <span class="invoice-customer">{{name}}</span>
     </p>
     <div class="invoice-address">
       <p>
-        1600 Amphitheatre Pkwy, Mountain View,<br> CA 94043, United States
+        {{address}}
       </p>
       <p>
         <span class="invoice-details">
           <span>INVOICE NO:</span>
-          <span>0047</span>
+          <span>{{invoiceNo}}</span>
         </span>
         <span class="invoice-details">
           <span>INVOICE DATE:</span>
-          <span>26/07/18</span>
+          <span>{{invoiceDate}}</span>
         </span>
       </p>
     </div>
@@ -26,6 +26,12 @@
 import Vue from 'vue';
 export default Vue.extend({
   name: 'ClientInfo',
+  props: {
+    invoiceNo: String,
+    invoiceDate: String,
+    name: String,
+    address: String,
+  },
 });
 </script>
 
@@ -60,6 +66,10 @@ section {
 @media only screen and (min-width: 600px) {
   .invoice-address {
     flex-flow: row;
+
+    p {
+      max-width: 40%;
+    }
   }
 
   section {

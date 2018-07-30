@@ -1,12 +1,12 @@
 <template>
-    <button
-        class="btn"
-        type="button"
-    >
-        <span>
-            <slot></slot>
-        </span>
-        </button>
+  <button
+    class="btn"
+    type="button"
+  >
+    <span>
+      <slot></slot>
+    </span>
+    </button>
 </template>
 <script lang="ts">
 import Vue from 'vue';

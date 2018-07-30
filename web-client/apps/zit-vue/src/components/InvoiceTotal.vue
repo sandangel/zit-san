@@ -1,25 +1,39 @@
 <template>
-    <section class="invoice-total">
-        <div>
-            <span>ADVANCE</span>
-            <span>$21,000.00</span>
-        </div>
-        <div>
-            <span>DISCOUNT (10%)</span>
-            <span>$645.00</span>
-        </div>
-        <span style="flex: auto;"></span>
-        <div>
-            <span>TOTAL</span>
-            <span>$64,276.00</span>
-        </div>
-    </section>
+  <section class="invoice-total">
+    <div>
+      <span>ADVANCE</span>
+      <span>{{advance}}</span>
+    </div>
+    <div>
+      <span>DISCOUNT (10%)</span>
+      <span>{{discount}}</span>
+    </div>
+    <span style="flex: auto;"></span>
+    <div>
+      <span>TOTAL</span>
+      <span>{{total}}</span>
+    </div>
+  </section>
 </template>
 <script lang="ts">
 import Vue from 'vue';
 
 export default Vue.extend({
   name: 'InvoiceTotal',
+  props: {
+    advance: {
+      type: String,
+      required: true,
+    },
+    discount: {
+      type: String,
+      required: true,
+    },
+    total: {
+      type: String,
+      required: true,
+    },
+  },
 });
 </script>
 

@@ -1,11 +1,11 @@
 <template>
-    <p>
-        <span>{{textWithLength}}</span>
-        <span
-            class="hover-underline-animation"
-            @click="expanded = !expanded"
-        > {{ expanded ? 'less': 'more'}}</span>
-    </p>
+  <p>
+    <span>{{textWithLength}}</span>
+    <span
+      class="hover-underline-animation"
+      @click="expanded = !expanded"
+    > {{ expanded ? 'less': 'more'}}</span>
+  </p>
 </template>
 
 <script lang="ts">
@@ -62,7 +62,7 @@ p {
   left: 0;
   background-color: $zehitomo-primary;
   transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
+  transition: transform 0.3s ease-out;
 }
 .hover-underline-animation:hover::after {
   transform: scaleX(1);

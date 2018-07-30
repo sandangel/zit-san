@@ -5,22 +5,28 @@
         <label for="card-element">
           Credit or debit card
         </label>
-        <div id="card-element"
-             @change="changeHandler"
-             ref="card-element">
+        <div
+          id="card-element"
+          @change="changeHandler"
+          ref="card-element"
+        >
           <!-- A Stripe Element will be inserted here. -->
-        </div>
-
-        <!-- Used to display form errors. -->
-        <div ref="card-errors"
-             role="alert"></div>
       </div>
 
-      <button class="invoice-submit"
-              type="button"
-              @click="submitHandler">
-        <span>Submit Payment</span>
-      </button>
+      <!-- Used to display form errors. -->
+      <div
+        ref="card-errors"
+        role="alert"
+      ></div>
+        </div>
+
+        <button
+          class="invoice-submit"
+          type="button"
+          @click="submitHandler"
+        >
+          <span>Submit Payment</span>
+          </button>
     </form>
   </section>
 </template>
@@ -58,6 +64,8 @@ import Vue from 'vue';
 export default Vue.extend({
   name: 'InvoicePay',
   mounted() {
+    // In mounted hook, the 'card-element' node is actually attached to the DOM.
+
     // Create an instance of Elements.
     const elements = stripe.elements();
 
@@ -66,7 +74,10 @@ export default Vue.extend({
   },
   methods: {
     changeHandler(event: stripe.elements.ElementChangeResponse) {
+      // Vetur issue with TS server so we could not see the error within VSCode
+      // but there are compiling errors if we do not perform a type cast.
       const displayError = this.$refs['card-errors'] as HTMLDivElement;
+
       if (event.error != null) {
         displayError.textContent = event.error.message as string;
       } else {
@@ -124,6 +135,7 @@ form {
     overflow: hidden;
     position: relative;
 
+    // Ink effect
     &:before {
       content: '';
 
