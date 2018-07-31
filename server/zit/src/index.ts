@@ -1,28 +1,19 @@
-import nodemailer from 'nodemailer';
+import { send_mail } from './send_mail';
+import express from 'express';
+import bodyParser from 'body-parser';
 
-nodemailer.createTestAccount((err, account) => {
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    secure: false,
-    auth: {
-      user: account.user,
-      pass: account.pass,
-    },
-  });
+const app = express();
 
-  const mailOptions: nodemailer.SendMailOptions = {
-    from: '"Zehitomo" <zehitomo@example.com',
-    to: 'vinhsannguyen91@gmail.com',
-    subject: 'Invoice',
-    html: '<a href="localhost:8080">Invoice message.</a>',
-  };
+app.use(
+  // Use complex algorithm for deep parsing that can deal with nested objects.
+  // https://stackoverflow.com/questions/39870867/what-does-app-usebodyparser-json-do#39872729
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+);
 
-  transporter.sendMail(mailOptions, (err, info) => {
-    if (err != null) {
-      console.log(err);
-    }
-
-    console.log(`Message sent: ${info}`);
-  });
+app.use(bodyParser.json());
+app.post('/invoice', (req, res) => {
+  console.log(req.body);
+  send_mail();
 });
