@@ -19,7 +19,12 @@ Optional:
 
 ## Project structure
 
-Leverage Monorepo [WIP] to maximize code reusability and unify CI/CD setup.
+Client-side code is place in web-client folder.
+
+- apps: contains applications for projects
+- libs: contains reusable libraries that can be extracted from different apps.
+
+Server-side code is place in server folder.
 
 ## Toolings
 
@@ -30,7 +35,7 @@ For more information please read this [link](https://conventionalcommits.org/).
 
 Quick start: instead of `git commit`, use `npm run cz` or `yarn cz`
 
-There 3 scopes in commit message:
+There are 3 scopes in commit message:
 
 - 'payment-page': Payment page user interface.
 - 'zit-server': ZIT server side app.
@@ -63,3 +68,12 @@ will become
 // client/apps/zit/Payment.tsx
 import PayButton from '@zehitomo/ui/PayButton';
 ```
+
+### Stripe
+
+Used for payment methods.
+
+#### Vue app:
+
+Place a .env.local file in `web-client/apps/<app-name>/.env.local` which specifies the `VUE_APP_STRIPE_PUBLISHABLE_KEY` to add Stripe publishable key to your Vue app. This file won't be added to `git`.
+For more information please read: [vue-cli-guide](https://cli.vuejs.org/guide/mode-and-env.html#using-env-variables-in-client-side-code).
