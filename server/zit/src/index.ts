@@ -1,6 +1,6 @@
-import { send_mail } from './send_mail';
-import express from 'express';
 import bodyParser from 'body-parser';
+import express from 'express';
+import { send_mail } from './send_mail';
 
 const app = express();
 
@@ -13,7 +13,16 @@ app.use(
 );
 
 app.use(bodyParser.json());
-app.post('/invoice', (req, res) => {
-  console.log(req.body);
-  send_mail();
+app.post('/invoice', async (req, res) => {
+  try {
+    await send_mail(req.body);
+    res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    res.json({ ok: false });
+  }
+});
+
+app.listen(3000, () => {
+  console.log('Listening on port 3000.');
 });

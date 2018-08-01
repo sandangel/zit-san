@@ -4,7 +4,7 @@
   "description": "Simple server for ZIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "send": "ts-node src/index.ts"
+    "start": "node --inspect -r ts-node/register src/index.ts"
   },
   "keywords": [],
   "author": "",
