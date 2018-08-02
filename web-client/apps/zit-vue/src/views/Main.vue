@@ -1,19 +1,15 @@
 <template>
-    <main>
-        <ClientInfo
-            invoiceNo="0047"
-            invoiceDate="26/07/18"
-            name="Thinh Pham"
-            address="1600 Amphitheatre Pkwy, Mountain View, CA 94043, United States"
-        ></ClientInfo>
-            <InvoiceDetails :tasks="tasks"></InvoiceDetails>
-            <InvoiceTotal
-                advance="$21,000.00"
-                discount="$645.00"
-                total="$64,276.00"
-            ></InvoiceTotal>
-                <InvoicePay></InvoicePay>
-    </main>
+  <main>
+    <ClientInfo invoiceNo="0047"
+                invoiceDate="26/07/18"
+                name="Thinh Pham"
+                address="1600 Amphitheatre Pkwy, Mountain View, CA 94043, United States"></ClientInfo>
+    <InvoiceDetails :tasks="tasks"></InvoiceDetails>
+    <InvoiceTotal advance="$21,000.00"
+                  discount="$645.00"
+                  total="$64,276.00"></InvoiceTotal>
+    <InvoicePay></InvoicePay>
+  </main>
 </template>
 <script lang="ts">
 import Vue from 'vue';
@@ -39,6 +35,7 @@ export default Vue.extend({
   },
   async created() {
     const clientInfo = await invoiceService.getClientInfo(this.$route);
+    console.log(clientInfo);
   },
 });
 </script>

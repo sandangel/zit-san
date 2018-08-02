@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import { send_mail } from './send_mail';
-
+import jwt from 'jsonwebtoken';
 const app = express();
 
 app.use(
@@ -11,6 +11,12 @@ app.use(
     extended: false,
   }),
 );
+
+app.use((_, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 app.use(bodyParser.json());
 app.post('/invoice', async (req, res) => {
@@ -23,9 +29,9 @@ app.post('/invoice', async (req, res) => {
   }
 });
 
-app.get('client-info', (req, res) => {
-  console.log(req.query);
-  res.json({ ok: true });
+app.get('/client-info', (req, res) => {
+  const info = jwt.verify(req.query.token, process.env.SERVER_APP_SECRET as string);
+  res.json(info);
 });
 
 app.listen(3000, () => {
