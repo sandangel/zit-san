@@ -1,7 +1,8 @@
 <template>
   <button
-    class="btn"
+    class="mat-button"
     type="button"
+    @click="$emit('click', $event)"
   >
     <span>
       <slot></slot>
@@ -16,67 +17,47 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.btn {
-  position: relative;
-
-  display: block;
-  margin: 30px auto;
-  padding: 0;
-
+.mat-button {
+  height: 40px;
+  padding: 0 10px;
+  margin: 20px;
+  border-radius: 5px;
+  background-color: $zehitomo-primary;
+  color: white;
+  border: 0px solid transparent;
+  box-shadow: 0 1px 3px #e6ebf1;
+  transition: box-shadow 300ms ease, background-color 0.3s ease;
   overflow: hidden;
-
-  border-width: 0;
-  outline: none;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-
-  background-color: $zehitomo-primary;
-  color: #ecf0f1;
-
-  transition: background-color 0.3s;
-}
-
-.btn:hover,
-.btn:focus {
-  background-color: $zehitomo-primary;
-}
-
-.btn > * {
   position: relative;
-}
 
-.btn span {
-  display: block;
-  padding: 12px 24px;
-}
+  // Ink effect
+  &:before {
+    content: '';
 
-.btn:before {
-  content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
 
-  position: absolute;
-  top: 50%;
-  left: 50%;
+    display: block;
+    width: 0;
+    padding-top: 0;
 
-  display: block;
-  width: 0;
-  padding-top: 0;
+    border-radius: 100%;
 
-  border-radius: 100%;
+    background-color: rgba(236, 240, 241, 0.3);
+    transform: translate(-50%, -50%);
+  }
 
-  background-color: rgba(236, 240, 241, 0.3);
+  &:active:before {
+    width: 120%;
+    padding-top: 120%;
 
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
+    transition: width 0.3s ease-out, padding-top 0.3s ease-out;
+  }
 
-.btn:active:before {
-  width: 120%;
-  padding-top: 120%;
-
-  transition: width 0.3s ease-out, padding-top 0.3s ease-out;
+  &:focus {
+    outline: none;
+  }
 }
 </style>
 

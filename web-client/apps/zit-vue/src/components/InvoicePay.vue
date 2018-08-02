@@ -1,39 +1,33 @@
 <template>
   <section>
-    <form>
-      <div class="form-row">
-        <label for="card-element">
-          Credit or debit card
-        </label>
-        <div
-          id="card-element"
+    <transition
+      mode="out-in"
+      name="fade"
+    >
+      <BouncingLoader v-if="loading"></BouncingLoader>
+      <form v-else>
+        <StripeElement
+          :card="card"
+          :error="error"
           @change="changeHandler"
-          ref="card-element"
-        >
-          <!-- A Stripe Element will be inserted here. -->
-      </div>
+        ></StripeElement>
+          <MatButton
+            class="invoice-submit"
+            @click="submitHandler"
+          >Submit Payment</MatButton>
+      </form>
 
-      <!-- Used to display form errors. -->
-      <div
-        ref="card-errors"
-        role="alert"
-      ></div>
-        </div>
-
-        <button
-          class="invoice-submit"
-          type="button"
-          @click="submitHandler"
-        >
-          <span>Submit Payment</span>
-          </button>
-    </form>
+      </transition>
   </section>
 </template>
 
 <script lang="ts">
 /// <reference types="stripe-v3" />
-/// <reference types="node" />
+
+import Vue from 'vue';
+import StripeElement from './StripeElement.vue';
+import BouncingLoader from './BouncingLoader.vue';
+import MatButton from './MatButton.vue';
 
 // Create a Stripe client.
 const stripe = Stripe(process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY as string);
@@ -59,45 +53,37 @@ const card = stripe.elements().create('card', {
   },
 });
 
-import Vue from 'vue';
-
 export default Vue.extend({
   name: 'InvoicePay',
-  mounted() {
-    // In mounted hook, the 'card-element' node is actually attached to the DOM.
-
-    // Create an instance of Elements.
-    const elements = stripe.elements();
-
-    // Create an instance of the card Element.
-    card.mount(this.$refs['card-element']);
+  components: { StripeElement, BouncingLoader, MatButton },
+  data() {
+    return {
+      loading: false,
+      error: '',
+      card,
+    };
   },
   methods: {
-    changeHandler(event: stripe.elements.ElementChangeResponse) {
-      // Vetur issue with TS server so we could not see the error within VSCode
-      // but there are compiling errors if we do not perform a type cast.
-      const displayError = this.$refs['card-errors'] as HTMLDivElement;
-
-      if (event.error != null) {
-        displayError.textContent = event.error.message as string;
-      } else {
-        displayError.textContent = '';
-      }
-    },
     submitHandler(event: Event) {
       event.preventDefault();
-
+      this.loading = true;
       stripe.createToken(card).then(result => {
-        const errorElement = this.$refs['card-errors'] as HTMLDivElement;
+        this.loading = false;
         if (result.error != null) {
           // Inform the user if there was an error.
-          errorElement.textContent = result.error.message as string;
+          this.error = result.error.message as string;
         } else {
-          errorElement.textContent = '';
-          console.log(result);
           // Send the token to your server.
+          console.log(result.token);
         }
       });
+    },
+    changeHandler(event: stripe.elements.ElementChangeResponse) {
+      if (event.error != null) {
+        this.error = event.error.message as string;
+      } else {
+        this.error = '';
+      }
     },
   },
 });
@@ -115,89 +101,26 @@ form {
   justify-content: center;
   align-items: center;
   flex-flow: column;
-
-  .form-row {
-    text-align: start;
-    padding: 0 20px;
-    width: 100%;
-  }
-
-  .invoice-submit {
-    height: 40px;
-    margin: 20px 20px 0;
-    padding: 0 10px;
-    border-radius: 5px;
-    background-color: $zehitomo-primary;
-    color: white;
-    border: 0px solid transparent;
-    box-shadow: 0 1px 3px #e6ebf1;
-    transition: box-shadow 300ms ease, background-color 0.3s ease;
-    overflow: hidden;
-    position: relative;
-
-    // Ink effect
-    &:before {
-      content: '';
-
-      position: absolute;
-      top: 50%;
-      left: 50%;
-
-      display: block;
-      width: 0;
-      padding-top: 0;
-
-      border-radius: 100%;
-
-      background-color: rgba(236, 240, 241, 0.3);
-      transform: translate(-50%, -50%);
-    }
-
-    &:active:before {
-      width: 120%;
-      padding-top: 120%;
-
-      transition: width 0.3s ease-out, padding-top 0.3s ease-out;
-    }
-
-    &:focus {
-      outline: none;
-    }
-  }
+  height: 100%;
 }
 
 @media only screen and (min-width: 600px) {
   form {
     flex-flow: row;
-    .form-row {
-      width: 60%;
-    }
+  }
 
-    .invoice-submit {
-      align-self: flex-end;
-    }
+  section {
+    height: 120px;
   }
 }
 
-.StripeElement {
-  background-color: white;
-  height: 40px;
-  padding: 10px 12px;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  transition: box-shadow 300ms ease;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
-.StripeElement--focus {
-  box-shadow: 0 1px 3px 0 #cfd7df;
-}
-
-.StripeElement--invalid {
-  border-color: #fa755a;
-}
-
-.StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

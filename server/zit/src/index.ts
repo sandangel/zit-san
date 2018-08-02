@@ -5,10 +5,10 @@ import { send_mail } from './send_mail';
 const app = express();
 
 app.use(
-  // Use complex algorithm for deep parsing that can deal with nested objects.
+  // true: Use complex algorithm for deep parsing that can deal with nested objects.
   // https://stackoverflow.com/questions/39870867/what-does-app-usebodyparser-json-do#39872729
   bodyParser.urlencoded({
-    extended: true,
+    extended: false,
   }),
 );
 
@@ -21,6 +21,11 @@ app.post('/invoice', async (req, res) => {
     console.error(err);
     res.json({ ok: false });
   }
+});
+
+app.get('client-info', (req, res) => {
+  console.log(req.query);
+  res.json({ ok: true });
 });
 
 app.listen(3000, () => {
