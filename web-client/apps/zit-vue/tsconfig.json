@@ -11,7 +11,8 @@
     "baseUrl": ".",
     "types": ["node", "jest", "stripe-v3"],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@zit/*": ["../../../server/zit/src/*"]
     },
     "lib": ["es2015", "dom", "dom.iterable", "scripthost"]
   },
