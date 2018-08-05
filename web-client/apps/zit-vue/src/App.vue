@@ -6,19 +6,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-import Header from './components/Header.vue';
-import Footer from './components/Footer.vue';
-import { invoiceService } from './invoice_service';
-
-export default Vue.extend({
-  name: 'app',
-  components: {
-    Header,
-    Footer,
-  },
-});
+<script src="./App.ts" lang="ts">
 </script>
 
 <style lang="scss">

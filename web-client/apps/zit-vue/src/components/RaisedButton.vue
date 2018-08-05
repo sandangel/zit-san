@@ -2,7 +2,7 @@
   <button
     class="mat-button"
     type="button"
-    @click="$emit('click', $event)"
+    @click="$emit('click')"
   >
     <span>
       <slot></slot>
@@ -12,7 +12,7 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-  name: 'MatButton',
+  name: 'RaisedButton',
 });
 </script>
 
@@ -20,7 +20,7 @@ export default Vue.extend({
 .mat-button {
   height: 40px;
   padding: 0 10px;
-  margin: 20px;
+  margin: 0 20px;
   border-radius: 5px;
   background-color: $zehitomo-primary;
   color: white;

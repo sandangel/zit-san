@@ -22,11 +22,11 @@
     "@vue/cli-plugin-typescript": "^3.0.0-rc.10",
     "@vue/cli-plugin-unit-jest": "^3.0.0-rc.10",
     "@vue/cli-service": "^3.0.0-rc.10",
-    "@vue/test-utils": "^1.0.0-beta.22",
+    "@vue/test-utils": "^1.0.0-beta.23",
     "lint-staged": "^6.0.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
-    "ts-jest": "^23.0.0",
+    "ts-jest": "^23.1.2",
     "typescript": "^3.0.1",
     "vue-template-compiler": "^2.5.17"
   },

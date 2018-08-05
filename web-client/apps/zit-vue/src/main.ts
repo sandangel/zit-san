@@ -1,6 +1,7 @@
 import Vue from 'vue';
-import App from './App.vue';
+import App from './App';
 import Main from './views/Main';
+
 import Router from 'vue-router';
 import './registerServiceWorker';
 

@@ -12,20 +12,20 @@
       <tbody>
         <tr
           :key="index"
-          v-for="(task, index) of tasks"
+          v-for="(item, index) of items"
         >
           <td class="invoice-description">
-            <h4>{{task.title}}</h4>
-            <ReadMore :text="task.description"></ReadMore>
+            <h4>{{item.title}}</h4>
+            <ReadMore :text="item.description"></ReadMore>
           </td>
           <td>
-            <h4>{{task.rate}}</h4>
+            <h4>${{item.rate}}</h4>
           </td>
           <td>
-            <h4>{{task.hours}}</h4>
+            <h4>{{item.hours}}</h4>
           </td>
           <td>
-            <h4>{{task.subtotal}}</h4>
+            <h4>${{getSubtotal(index)}}</h4>
           </td>
           </tr>
       </tbody>
@@ -33,19 +33,7 @@
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-import ReadMore from './ReadMore.vue';
-
-export default Vue.extend({
-  name: 'InvoiceDetails',
-  props: {
-    tasks: Array,
-  },
-  components: {
-    ReadMore,
-  },
-});
+<script src="./InvoiceDetails.ts" lang="ts">
 </script>
 <style lang="scss" scoped>
 section {

@@ -1,50 +1,27 @@
 <template>
-    <div class="form-row">
-        <label for="card-element">
-            Credit or debit card
-        </label>
-        <div
-            id="card-element"
-            ref="card-element"
-        >
-            <!-- A Stripe Element will be inserted here. -->
+  <div class="form-row">
+    <label for="card-element">
+      Credit or debit card
+    </label>
+
+    <div class="card-row">
+      <div
+        id="card-element"
+        ref="card-element"
+      >
+        <!-- A Stripe Element will be inserted here. -->
     </div>
-
     <!-- Used to display form errors. -->
-    <div
-        class="card-errors"
-        role="alert"
-    >{{error}}</div>
-        </div>
+
+    <slot></slot>
+  </div>
+  <div
+    class="card-errors"
+    role="alert"
+  >{{error}}</div>
+    </div>
 </template>
-<script lang="ts">
-import Vue from 'vue';
-
-interface Props {
-  card: stripe.elements.Element;
-  error: string;
-}
-
-export default Vue.extend<{}, {}, {}, Props>({
-  name: 'StripeElement',
-  props: {
-    card: Object,
-    error: String,
-  },
-  mounted() {
-    // In mounted hook, the 'card-element' node is actually attached to the DOM.
-    if (this.$refs['card-element'] !== undefined) {
-      // Create an instance of the card Element.
-      this.card.mount(this.$refs['card-element']);
-      (this.card as any).addEventListener(
-        'change',
-        (event: stripe.elements.ElementChangeResponse) => {
-          this.$emit('change', event);
-        },
-      );
-    }
-  },
-});
+<script src="./StripeElement.ts" lang="ts">
 </script>
 <style lang="scss" scoped>
 .StripeElement {
@@ -72,16 +49,44 @@ export default Vue.extend<{}, {}, {}, Props>({
 .card-errors {
   color: #fa755a;
   margin: 5px;
+  min-height: 1rem;
+  line-height: 1rem;
 }
 
 .form-row {
-  text-align: start;
+  text-align: center;
   padding: 0 20px;
   width: 100%;
 }
+
+.card-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: column;
+  height: 110px;
+}
+#card-element {
+  width: 100%;
+}
+
+label {
+  margin: 10px;
+}
 @media only screen and (min-width: 600px) {
-  .form-row {
+  #card-element {
     width: 60%;
+  }
+
+  .card-row {
+    flex-flow: row;
+    height: auto;
+    justify-content: center;
+  }
+
+  .card-errors {
+    margin: 10px;
   }
 }
 </style>

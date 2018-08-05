@@ -2,19 +2,17 @@
 
 ![Project Overview](images/overview.png 'Project Overview')
 
-You can edit the image by opening ProjectOverview.xml in draw.io.
-
 ## Work Breakdown
 
-- [ ] Build a simple server for sending email.
+- [x] Build a simple server for sending email.
 - [x] Design a simple Payment page.
-- [ ] Build UI of Payment page.
-- [ ] Add Stripe integration on front-end.
-- [ ] Add Stripe integration on back-end.
+- [x] Build UI of Payment page.
+- [x] Add Stripe integration on front-end.
+- [x] Add Stripe integration on back-end.
 
 Optional:
 
-- [ ] Extract reusable components.
+- [x] Extract reusable components.
 - [ ] Add PWA
 
 ## Project structure
@@ -77,3 +75,8 @@ Used for payment methods.
 
 Place a .env.local file in `web-client/apps/<app-name>/.env.local` which specifies the `VUE_APP_STRIPE_PUBLISHABLE_KEY` to add Stripe publishable key to your Vue app. This file won't be added to `git`.
 For more information please read: [vue-cli-guide](https://cli.vuejs.org/guide/mode-and-env.html#using-env-variables-in-client-side-code).
+
+#### Server app:
+
+Place a .env.local file in `server/zit` which specifies the `SERVER_APP_SECRET` for json web token secret and `STRIPE_SECRET_KEY` using Stripe secret key to create charge on the server.
+This file won't be added to `git` too.
