@@ -4,7 +4,7 @@ import { InvoiceRequest } from '@zit/invoice_model';
 import { ChargeInfo } from '@zit/charge_model';
 
 export class InvoiceService {
-  private url = 'http://localhost:3000';
+  private url = process.env.VUE_APP_HOST_URL as string;
 
   public getClientInfo({ query }: Route): AxiosPromise<InvoiceRequest> {
     return axios.get(`${this.url}/client-info?token=${query.token}`, {

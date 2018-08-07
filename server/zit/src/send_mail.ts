@@ -17,13 +17,14 @@ export async function sendMail(req: InvoiceRequest) {
 
   const secret = process.env.SERVER_APP_SECRET as string;
   const token = jwt.sign(req, secret, { expiresIn: '2d' });
+  const hostUrl = process.env.SERVER_HOST_URL as string;
 
   const mailOptions: SendMailOptions = {
     from: '"Zehitomo" <zehitomo@example.com',
     to: req.receiver.email,
     subject: 'Invoice',
     text: `Hello, this is the Zehitomo team. You have a message from ${req.sender.name}.`,
-    html: `<a target="_blank" href="http://localhost:8080/?token=${token}">Invoice message.</a>`,
+    html: `<a target="_blank" href="${hostUrl}/?token=${token}">Invoice message.</a>`,
   };
 
   const info = await transporter.sendMail(mailOptions);

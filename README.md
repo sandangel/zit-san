@@ -73,10 +73,20 @@ Used for payment methods.
 
 #### Vue app:
 
-Place a .env.local file in `web-client/apps/<app-name>/.env.local` which specifies the `VUE_APP_STRIPE_PUBLISHABLE_KEY` to add Stripe publishable key to your Vue app. This file won't be added to `git`.
+Place a .env.local file in `web-client/apps/<app-name>/.env.local` which specifies:
+
+- `VUE_APP_STRIPE_PUBLISHABLE_KEY` to add Stripe publishable key to your Vue app.
+- `VUE_APP_HOST_URL="http://localhost:8080"` for API server address in dev mode.
+
+This file won't be added to `git`.
 For more information please read: [vue-cli-guide](https://cli.vuejs.org/guide/mode-and-env.html#using-env-variables-in-client-side-code).
 
 #### Server app:
 
-Place a .env.local file in `server/zit` which specifies the `SERVER_APP_SECRET` for json web token secret and `STRIPE_SECRET_KEY` using Stripe secret key to create charge on the server.
+Place a .env.local file in `server/zit` which specifies
+
+- `SERVER_APP_SECRET` for json web token secret.
+- `STRIPE_SECRET_KEY` using Stripe secret key to create charge on the server.
+- `SERVER_HOST_URL`, set to `http://localhost:8080` for dev mode and to actual domain for prod mode.
+
 This file won't be added to `git` too.
