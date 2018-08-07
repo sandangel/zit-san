@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "jsx": "react",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "pretty": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "suppressExcessPropertyErrors": true,
+    "baseUrl": "./",
+    "paths": {
+      "@zit-react/*": ["src/*"],
+      "@zit/*": ["../../../server/zit/src/*"]
+    },
+    "types": ["node", "jest"],
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*.*"]
+}
