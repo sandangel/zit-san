@@ -2,7 +2,7 @@ import nodemailer, { SendMailOptions } from 'nodemailer';
 import { InvoiceRequest } from './invoice_model';
 import jwt from 'jsonwebtoken';
 
-export async function send_mail(req: InvoiceRequest) {
+export async function sendMail(req: InvoiceRequest) {
   const account = await nodemailer.createTestAccount();
 
   const transporter = nodemailer.createTransport({

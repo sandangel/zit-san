@@ -5,10 +5,11 @@ require('dotenv').config({ path: path.resolve(process.cwd(), '.env.local') });
 
 import bodyParser from 'body-parser';
 import express from 'express';
-import { send_mail } from './send_mail';
+import { sendMail } from './send_mail';
 import { ChargeInfo } from './charge_model';
 import jwt from 'jsonwebtoken';
 import Stripe from 'stripe';
+import cors from 'cors';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
@@ -22,16 +23,12 @@ app.use(
   }),
 );
 
-app.use((_, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+app.use(cors());
 
 app.use(bodyParser.json());
 app.post('/invoice', async (req, res) => {
   try {
-    await send_mail(req.body);
+    await sendMail(req.body);
     res.json({ ok: true });
   } catch (err) {
     console.error(err);

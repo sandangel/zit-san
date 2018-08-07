@@ -8,6 +8,7 @@ export interface InvoiceRequest {
     title: string;
     hours: number;
     rate: number;
+    description: string;
   }>;
   invoiceNo: string;
   invoiceDate: string;
