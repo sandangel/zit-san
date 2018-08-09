@@ -4,7 +4,7 @@ import { InvoiceRequest } from '@zit/invoice_model';
 import styled, { media } from '@zit-react/shared';
 
 const StyledInvoiceDetails = styled.section`
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 
   .invoice-description {
     width: 50%;
@@ -60,51 +60,45 @@ const StyledInvoiceDetails = styled.section`
 interface Props {
   items: InvoiceRequest['items'];
 }
-class InvoiceDetails extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
 
-  getSubtotal = (i: number) => {
-    const item = this.props.items[i];
+const InvoiceDetails = (props: Props) => {
+  const getSubtotal = (i: number) => {
+    const item = props.items[i];
     return (item.rate * item.hours).toFixed(2);
   };
 
-  render() {
-    return (
-      <StyledInvoiceDetails>
-        <table>
-          <thead>
-            <tr>
-              <th>TASK DESCRIPTION</th>
-              <th>RATE</th>
-              <th>HOURS</th>
-              <th>TOTAL</th>
+  return (
+    <StyledInvoiceDetails>
+      <table>
+        <thead>
+          <tr>
+            <th>TASK DESCRIPTION</th>
+            <th>RATE</th>
+            <th>HOURS</th>
+            <th>TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.items.map((item, i) => (
+            <tr key={i}>
+              <td className="invoice-description">
+                <h4>{item.title}</h4>
+                <ReadMore text={item.description} />
+              </td>
+              <td>
+                <h4>${item.rate}</h4>
+              </td>
+              <td>
+                <h4>{item.hours}</h4>
+              </td>
+              <td>
+                <h4>${getSubtotal(i)}</h4>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {this.props.items.map((item, index) => (
-              <tr>
-                <td className="invoice-description">
-                  <h4>{item.title}</h4>
-                  <ReadMore text={item.description} />
-                </td>
-                <td>
-                  <h4>${item.rate}</h4>
-                </td>
-                <td>
-                  <h4>{item.hours}</h4>
-                </td>
-                <td>
-                  <h4>${this.getSubtotal(index)}</h4>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </StyledInvoiceDetails>
-    );
-  }
-}
-
+          ))}
+        </tbody>
+      </table>
+    </StyledInvoiceDetails>
+  );
+};
 export default InvoiceDetails;

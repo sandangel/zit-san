@@ -5,6 +5,10 @@ import Footer from './components/Footer';
 import ClientInfo from './components/ClientInfo';
 import InvoiceDetails from './components/InvoiceDetails';
 import styled, { media } from '@zit-react/shared';
+import InvoiceTotal from './components/InvoiceTotal';
+import StripeElement from './components/StripeElement';
+import { Elements, StripeProvider } from 'react-stripe-elements';
+import RaisedButton from './components/RaisedButton';
 
 const items = [
   {
@@ -58,6 +62,12 @@ class App extends Component {
             address={'1600 Amphitheatre Pkwy, Mountain View, CA 94043, United States'}
           />
           <InvoiceDetails items={items} />
+          <InvoiceTotal advance={21000.0} discount={8} total={64275.0} />
+          <StripeProvider apiKey="pk_test_x6cf2KGxbVSP4n0vYiPxbaRB">
+            <Elements>
+              <StripeElement renderButton={<RaisedButton renderText={'Submit Payment'} />} />
+            </Elements>
+          </StripeProvider>
           <BouncingLoader />
         </main>
         <Footer />

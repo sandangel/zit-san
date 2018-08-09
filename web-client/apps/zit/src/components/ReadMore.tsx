@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { theme } from '@zit-react/shared';
+import styled, { theme, bindThis } from '@zit-react/shared';
 
 interface Props {
   text: string;
@@ -44,6 +44,11 @@ export default class ReadMore extends React.Component<Props, State> {
     this.state = { expanded: false };
   }
 
+  @bindThis
+  onReadMore() {
+    this.setState({ expanded: !this.state.expanded });
+  }
+
   render() {
     const length = this.props.length || 50;
     const { text } = this.props;
@@ -52,11 +57,7 @@ export default class ReadMore extends React.Component<Props, State> {
     return (
       <StyledReadMore>
         <span>{expanded ? text : textWithLength}</span>
-        <br />
-        <span
-          className="hover-underline-animation"
-          onClick={() => this.setState({ expanded: !expanded })}
-        >
+        <span className="hover-underline-animation" onClick={this.onReadMore}>
           {expanded ? 'less' : 'more'}
         </span>
       </StyledReadMore>

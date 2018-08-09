@@ -15,6 +15,7 @@
     "array-type": false,
     "no-implicit-dependencies": false,
     "arrow-parens": [true, "ban-single-arg-parens"],
+    "ban-types": false,
     "trailing-comma": [
       true,
       {

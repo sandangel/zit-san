@@ -4,11 +4,12 @@ import styled, { keyframes, theme } from '@zit-react/shared';
 const bouncingLoader = keyframes`
   from {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(-0.5rem);
   }
+
   to {
-    opacity: 0.1;
-    transform: translateY(-1rem);
+    opacity: 0.2;
+    transform: translateY(0.5rem);
   }
 `;
 

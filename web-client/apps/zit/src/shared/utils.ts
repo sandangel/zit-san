@@ -21,18 +21,15 @@ export const sizes: BreakPoints = {
 };
 
 export interface Media {
-  desktop: ThemedCssFunction<unknown>;
-  tablet: ThemedCssFunction<unknown>;
-  phone: ThemedCssFunction<unknown>;
+  desktop: ThemedCssFunction<any>;
+  tablet: ThemedCssFunction<any>;
+  phone: ThemedCssFunction<any>;
 }
 
 // Iterate through the sizes and create a media template
 export const media: Media = Object.keys(sizes).reduce(
   (acc, label) => {
-    acc[label] = (
-      t: TemplateStringsArray,
-      ...i: Interpolation<ThemedStyledProps<unknown, unknown>>[]
-    ) => {
+    acc[label] = (t: TemplateStringsArray, ...i: Interpolation<ThemedStyledProps<any, any>>[]) => {
       const { min, max } = sizes[label];
       if (min != null && max != null) {
         return css`

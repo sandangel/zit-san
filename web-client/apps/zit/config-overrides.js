@@ -1,17 +1,12 @@
-const {
-  rewireWebpack: rewireTypescript,
-  rewireJest: rewireTypescriptJest,
-  rewireTSLint, // Optional, needed if using the TSLint integration.
-} = require('react-app-rewire-typescript-babel-preset');
 const path = require('path');
+// use local ts-loader instead of ts-loader in package dependency.
+const rewireTypescript = require('./tools/rewireTypescript');
 
 module.exports = {
   webpack: function(config, env) {
     config = rewireTypescript(config);
 
-    // Optional, needed if using the TSLint integration.
-    config = rewireTSLint(config /* {} - optional tslint-loader options */);
-
+    // add tsconfig paths to webpack alias.
     const {
       compilerOptions: { paths, baseUrl },
     } = require(path.resolve(__dirname, './tsconfig.json'));
@@ -30,7 +25,7 @@ module.exports = {
 
     return config;
   },
-  jest: function(config) {
-    return rewireTypescriptJest(config);
-  },
+  // jest: function(config) {
+  //   return rewireTypescriptJest(config);
+  // },
 };

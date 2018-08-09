@@ -4,7 +4,6 @@ import styled, { media } from '@zit-react/shared';
 const StyledClientInfo = styled.section`
   text-align: left;
   margin-top: 30px;
-  font-size: 0.9rem;
 
   .invoice-details {
     display: flex;
