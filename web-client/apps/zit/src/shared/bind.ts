@@ -1,7 +1,10 @@
 /**
  * @copyright 2015, Andrey Popp <8mayday@gmail.com>
  *
+ * modified: San Nguyen
  */
+
+type AnyFunc = (...args: any[]) => any;
 
 /**
  * Explicitly mark method to bind `this` to the component.
@@ -9,7 +12,6 @@
  * The getter will return a .bind version of the function
  * and memoize the result against a symbol on the instance
  */
-type AnyFunc = (...args: any[]) => any;
 export function bindThis(
   target: any,
   key: string | symbol,
