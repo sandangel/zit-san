@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "jsx": "react",
+    "skipLibCheck": true,
+    "pretty": true,
+    "lib": ["es6", "dom"],
+    "moduleResolution": "node",
+    "outDir": "build",
+    "rootDir": "../../../",
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "suppressExcessPropertyErrors": true,
+    "experimentalDecorators": true,
+    "baseUrl": "./",
+    "paths": {
+      "@zit-react/*": ["src/*"],
+      "@zit/*": ["../../../server/zit/src/*"],
+      "@zit-vue/*": ["../zit-vue/src/*"]
+    },
+    "types": ["node", "jest", "stripe-v3"],
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*.*"]
+}
